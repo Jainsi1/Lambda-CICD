@@ -1,8 +1,6 @@
 import boto3
 import yaml
-client = boto3.client('iam')
-module.exports = {
-  showMessage: python() {
+
 def lambda_handler():
  
   with open('data.yaml') as f:
@@ -31,4 +29,3 @@ def lambda_handler():
           )      
         
           print (usergroup)
-  }
