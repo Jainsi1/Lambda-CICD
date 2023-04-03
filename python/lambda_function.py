@@ -2,7 +2,7 @@ import boto3
 import yaml
 client = boto3.client('iam')
 module.exports = {
-  showMessage: function() {
+  showMessage: python() {
 def lambda_handler():
  
   with open('data.yaml') as f:
