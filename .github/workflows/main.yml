@@ -31,7 +31,3 @@ jobs:
 
       - name: Update lambda function code
         run: aws lambda update-function-code --function-name test-lambda --s3-bucket gjygju --s3-key my-package.zip
-     
-          
-      
-       
