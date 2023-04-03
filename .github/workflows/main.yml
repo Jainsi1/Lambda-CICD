@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+       main
+jobs:
+  lambda:
+    name: lambda deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        
+      - name: set up python
+        uses: actions/setup-python@v4
+        with:
+         python-version: '3.9'
+         
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1   
+          
+      - name: zip the folder
+        run: zip -r my-package.zip module/python
+        shell: bash
+        
+      - name: Upload to S3
+        run: aws s3 cp my-package.zip s3://gjygju/my-package.zip
+
+      - name: Update lambda function code
+        run: aws lambda update-function-code --function-name test-lambda --s3-bucket gjygju --s3-key my-package.zip
+     
+          
+      
+       
