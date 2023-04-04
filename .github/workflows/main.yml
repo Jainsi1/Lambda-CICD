@@ -50,13 +50,12 @@ jobs:
       - name: Update lambda layer
         run: |
           echo "LayerVersionArn=$(aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip --query 'LayerVersionArn')" >> $GITHUB_OUTPUT
-
         id: layerversion
         
         
       - name: update lambda function layer
         run: |
             echo "${{steps.layerversion.outputs.LayerVersionArn}}"
-            aws lambda update-function-configuration --function-name test-lambda --layers ["${{ steps.layerversion.outputs.LayerVersionArn }}"]
+            aws lambda update-function-configuration --function-name test-lambda --layers ["${{steps.layerversion.outputs.LayerVersionArn}}"]
 
 
