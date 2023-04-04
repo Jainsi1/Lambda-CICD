@@ -1,8 +1,8 @@
 import boto3
 import yaml
 
-def lambda_handler():
- 
+def lambda_handler(event, context):
+    client = boto3.client('iam')
     with open('module/python/data.yaml') as f:
            data = yaml.load(f,Loader= yaml.FullLoader)
 
