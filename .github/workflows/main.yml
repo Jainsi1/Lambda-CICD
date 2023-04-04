@@ -48,10 +48,10 @@ jobs:
         run: aws s3 cp dependency.zip s3://gjygju/dependency.zip
         
       - name: Update lambda layer
-        run:  publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip
+        run: aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip
         id: layerversion
         
       - name: update lambda function layer
-        run: update-function-configuration --function-name test-lambda --layers [ ${{ steps.layerversion.outputs.LayerVersionArn }} ]
+        run: aws lambda update-function-configuration --function-name test-lambda --layers [ ${{ steps.layerversion.outputs.LayerVersionArn }} ]
 
 
