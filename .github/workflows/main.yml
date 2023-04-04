@@ -52,6 +52,6 @@ jobs:
         id: layerversion
         
       - name: update lambda function layer
-        run: aws lambda update-function-configuration --function-name test-lambda --layers [ ${{ steps.layerversion.outputs.LayerVersionArn }} ]
+        run: aws lambda update-function-configuration --function-name test-lambda --layers [ "${{ steps.layerversion.outputs.LayerVersionArn }}" ]
 
 
