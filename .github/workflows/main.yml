@@ -48,10 +48,14 @@ jobs:
         run: aws s3 cp dependency.zip s3://gjygju/dependency.zip
         
       - name: Update lambda layer
-        run: aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip
+        run: |
+          versionarn=$(aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip --query 'LayerVersionArn'
+        )
+          echo "LayerVersionArn=$versionarn" >> GITHUB_OUTPUT
         id: layerversion
         
+        
       - name: update lambda function layer
-        run: aws lambda update-function-configuration --function-name test-lambda --layers [ "${{ steps.layerversion.outputs.LayerVersionArn }}" ]
+        run: aws lambda update-function-configuration --function-name test-lambda --layers ["${{ steps.layerversion.outputs.LayerVersionArn }}"]
 
 
