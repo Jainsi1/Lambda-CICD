@@ -49,8 +49,8 @@ jobs:
         
       - name: Update lambda layer
         run: |
-          versionarn=$(aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip --query 'LayerVersionArn')
-          echo "LayerVersionArn=$versionarn" >> GITHUB_OUTPUT
+          LayerVersionArn=$(aws lambda publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip --query 'LayerVersionArn')
+          echo "LayerVersionArn=$LayerVersionArn" >> GITHUB_OUTPUT
         id: layerversion
         
         
