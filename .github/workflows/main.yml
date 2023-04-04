@@ -45,7 +45,7 @@ jobs:
         
       - name: upload dependency zip to s3
         working-directory: layer
-        run: aws s3 cp /layer/dependency.zip s3://gjygju/dependency.zip
+        run: aws s3 cp dependency.zip s3://gjygju/dependency.zip
         
       - name: Update lambda layer
         run:  publish-layer-version --layer-name lambda-layer --content S3Bucket=gjygju,S3Key=dependency.zip
