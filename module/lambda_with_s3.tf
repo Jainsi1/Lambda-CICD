@@ -34,7 +34,9 @@ resource "aws_lambda_function" "func" {
 resource "aws_lambda_layer_version" "my_custom_layer" {
   layer_name = "lambda_layer"
   filename = "/Users/jainsi/layer/mypackage.zip"
+  compatible_runtimes = ["python3.9"]
 }
+
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name              = "lambdalog"
   retention_in_days = 14
