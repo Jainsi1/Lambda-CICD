@@ -57,5 +57,9 @@ jobs:
         run: |
             echo "${{steps.layerversion.outputs.LayerVersionArn}}"
             aws lambda update-function-configuration --function-name test-lambda --layers "${{steps.layerversion.outputs.LayerVersionArn}}"
+            
+      - name: Test the function
+        run: aws lambda invoke --function-name test-lambda
+
 
 
